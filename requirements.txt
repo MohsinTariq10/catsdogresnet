@@ -22,6 +22,7 @@ GDAL==2.3.3
 geopandas==0.4.1
 google-pasta==0.1.7
 grpcio==1.22.0
+gunicorn==19.9.0
 h5py==2.9.0
 idna==2.8
 imageio==2.5.0
