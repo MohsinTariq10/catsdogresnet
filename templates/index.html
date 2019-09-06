@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+</style>
+</head>
+<body>
+    <div>
+        <img id="blah" src="#" alt="your image" />
+    </div>
+    <div>
+        <input type='file' onchange="readURL(this);" />
+    </div>
+    <div>
+        <p>I think this is a <span style="color:red;font-size: 20" id="result"></span></p>
+    </div>
+</body>
+</html>
+
+
+<script>
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var dataURL = reader.result;
+                var $SCRIPT_ROOT = {{ request.script_root|tojson|safe}} 
+                console.log(dataURL);
+                $.ajax({
+                    type: "POST",
+                    url : $SCRIPT_ROOT + "/predict",
+                    data : dataURL,
+                    success : function(data){
+                        console.log(data);
+                        $('#result').text(data);
+                    }
+                })
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(300);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+            
+        }
+    }
+
+
+</script>
