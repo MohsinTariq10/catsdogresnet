@@ -18,8 +18,6 @@ entrypoints==0.3
 Fiona==1.8.4
 Flask==1.1.1
 gast==0.2.2
-GDAL==2.3.3
-geopandas==0.4.1
 google-pasta==0.1.7
 grpcio==1.22.0
 gunicorn==19.9.0
